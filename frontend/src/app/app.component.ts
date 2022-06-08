@@ -1,20 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import * as data from './models/users.json';
-import { User } from './models/user.model';
+import { UserService } from './services/user.service';
+import { UserViewItem } from './models/user.model';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'frontend';
 
-  displayedColumns: string[] = [	'name', 'age', 'registered', 'email', 'balance'];
-  dataSource: User[] = (data as any).default;
+  displayedColumns: string[] = [
+    'name',
+    'age',
+    'registeredDateString',
+    'email',
+    'balance',
+  ];
+  dataSource!: MatTableDataSource<UserViewItem>;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    console.log(this.dataSource)
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  constructor(private userService: UserService) {
+    this.dataSource = new MatTableDataSource(this.userService.getUsers());
+    console.log(this.dataSource);
   }
 }
