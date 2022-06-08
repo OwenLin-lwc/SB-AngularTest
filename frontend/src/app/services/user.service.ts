@@ -32,7 +32,18 @@ export class UserService {
   }
 
   getUsers(): UserViewItem[] {
-    return this.users.sort((a, b) => this.compare(a.name, b.name, true));
+    return this.sortUsers(this.users.slice());
+  }
+
+  searchUser(keyword: string): UserViewItem[] {
+    console.log(this.users.filter((u) => u.name.indexOf(keyword) > -1));
+    return this.sortUsers(
+      this.users.filter((u) => u.name.indexOf(keyword) > -1)
+    );
+  }
+
+  sortUsers(users: UserViewItem[]): UserViewItem[] {
+    return users.sort((a, b) => this.compare(a.name, b.name, true));
   }
 
   compare(a: number | string, b: number | string, isAsc: boolean) {

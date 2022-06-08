@@ -29,6 +29,11 @@ export class AppComponent {
 
   constructor(private userService: UserService) {
     this.dataSource = new MatTableDataSource(this.userService.getUsers());
-    console.log(this.dataSource);
+  }
+
+  onSearch(keyword: string) {
+    this.dataSource = keyword
+      ? new MatTableDataSource(this.userService.searchUser(keyword))
+      : new MatTableDataSource(this.userService.getUsers());
   }
 }
