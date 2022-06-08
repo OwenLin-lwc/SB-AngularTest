@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AppComponent {
   title = 'frontend';
+  keyword = '';
 
   displayedColumns: string[] = [
     'name',
@@ -32,8 +33,14 @@ export class AppComponent {
   }
 
   onSearch(keyword: string) {
-    this.dataSource = keyword
-      ? new MatTableDataSource(this.userService.searchUser(keyword))
+    this.keyword = keyword;
+    this.dataSource = this.keyword
+      ? new MatTableDataSource(this.userService.searchUser(this.keyword))
       : new MatTableDataSource(this.userService.getUsers());
+  }
+
+  onResetBalance() {
+    this.userService.resetBalance();
+    this.onSearch(this.keyword);
   }
 }

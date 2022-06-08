@@ -35,6 +35,10 @@ export class UserService {
     return this.sortUsers(this.users.slice());
   }
 
+  resetBalance() {
+    this.users.forEach((u) => (u.balance = 0));
+  }
+
   searchUser(keyword: string): UserViewItem[] {
     console.log(this.users.filter((u) => u.name.indexOf(keyword) > -1));
     return this.sortUsers(

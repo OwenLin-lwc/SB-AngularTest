@@ -10,7 +10,7 @@
         #search
       />
     </mat-form-field>
-    <button mat-button>Reset Balance</button>
+    <button mat-raised-button (click)="onResetBalance()">Reset Balance</button>
   </mat-card-actions>
   <mat-card-content>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
