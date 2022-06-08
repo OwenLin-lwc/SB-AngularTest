@@ -11,9 +11,10 @@ import { User } from './models/user.model';
 export class AppComponent {
   title = 'frontend';
 
-  users: User[] = (data as any).default;
+  displayedColumns: string[] = [	'name', 'age', 'registered', 'email', 'balance'];
+  dataSource: User[] = (data as any).default;
 
   constructor() {
-    console.log(this.users)
+    console.log(this.dataSource)
   }
 }

@@ -1,33 +1,38 @@
-<input type="text">
-<br>
-<table>
-  <tr>
-    <th>
-      Name
-    </th>
-    <th>
-      Age
-    </th>
-    <th>
-      Registered Date
-    </th>
-    <th>
-      Email
-    </th>
-    <th>
-      Balance
-    </th>
-  </tr>
-  <tr *ngFor="let user of users">
-    <td> {{user.name}}
-    </td>
-    <td> {{user.age}}
-    </td>
-    <td> {{user.registered | date: 'dd-mm-yyyy dd:mm:ss'}}
-    </td>
-    <td> {{user.email}}
-    </td>
-    <td> {{user.balance}}
-    </td>
-  </tr>
-  </table>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Age Column -->
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef> Age </th>
+    <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+  </ng-container>
+
+  <!-- Registered Date Column -->
+  <ng-container matColumnDef="registered">
+    <th mat-header-cell *matHeaderCellDef> Registered Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.registered | date}} </td>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <!-- Balance Column -->
+  <ng-container matColumnDef="balance">
+    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.balance}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
